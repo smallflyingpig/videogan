@@ -54,7 +54,7 @@ def to_variable(x, requires_grad = True):
 
 def denorm(x):
     out = (x + 1.0) / 2.0
-    return nn.Tanh(out)
+    return nn.Tanh()(out)
 
 num_epoch = 5
 batchSize = 64
@@ -135,7 +135,7 @@ for current_epoch in tqdm(range(1,num_epoch+1)):
             for tag,value in info.items():
                 logger.scalar_summary(tag, value, counter)
 
-            '''
+            
             # Calculate validation loss
             videos = to_variable(dataloader.get_batch('test').permute(0,2,1,3,4)) # [64,3, 32, 64, 64]
             first_frame = videos[:,:,0:1,:,:]
@@ -149,7 +149,7 @@ for current_epoch in tqdm(range(1,num_epoch+1)):
             }
             for tag,value in info.items():
                 logger.scalar_summary(tag, value, counter)
-            '''
+            
 
         n_updates += 1
 

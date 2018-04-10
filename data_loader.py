@@ -39,7 +39,7 @@ class DataLoader(object):
 
     def get_batch(self, type_dataset='train'):
         if type_dataset not in('train', 'test'):
-            print 'type_dataset = ', type_dataset, ' is invalid. Returning None'
+            print('type_dataset = ', type_dataset, ' is invalid. Returning None')
             return None
 
         dataset_index = self.train_index if type_dataset == 'train' else self.test_index
@@ -50,11 +50,11 @@ class DataLoader(object):
         t_out = torch.zeros((self.batch_size, self.frame_size, 3, self.crop_size, self.crop_size))
         to_tensor = transforms.ToTensor() # Transforms 0-255 numbers to 0 - 1.0.
 
-        for idx in xrange(self.batch_size):
+        for idx in range(self.batch_size):
             video_path = os.path.join(DATA_ROOT, dataset_index[self.cursor])
             inputimage = cv2.imread(video_path)
             count = inputimage.shape[0] / self.image_size
-            for j in xrange(self.frame_size):
+            for j in range(self.frame_size):
                 if j < count:
                     cut = j * self.image_size
                 else:
